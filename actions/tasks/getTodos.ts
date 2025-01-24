@@ -1,4 +1,4 @@
-import { Todo } from "@/entities";
+import { Task } from "@/entities";
 import { redirect } from "next/navigation";
 
 export async function getTodos() {
@@ -9,7 +9,7 @@ export async function getTodos() {
 
         const tasks = await data.json();
 
-        return tasks as Todo[];
+        return tasks as Task[];
     } catch (error) {
         console.log(error);
         return redirect("/500");

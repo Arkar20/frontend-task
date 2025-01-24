@@ -4,13 +4,13 @@ import { deleteTodo, toggleTodoStatus } from "@/actions";
 import { Checkbox } from "@/components/atoms";
 import { Tile } from "@/components/molecules";
 import { TrashIcon } from "@/components/svgs/TrashIcon";
-import { Todo } from "@/entities";
+import { Task } from "@/entities";
 import { cn } from "@/utils";
 import Link from "next/link";
 import React from "react";
 
 type TodoProps = {
-    tasks: Todo[];
+    tasks: Task[];
 };
 
 export function TodoList({ tasks }: TodoProps) {

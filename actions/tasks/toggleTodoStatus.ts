@@ -14,7 +14,7 @@ export async function toggleTodoStatus(todoId: number) {
 
         return {
             success: true,
-            message: "Todo Status Has Changed",
+            message: "Task Status Has Changed",
         };
     } catch (error) {
         console.log(error);

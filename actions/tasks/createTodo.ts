@@ -13,7 +13,7 @@ export async function createTodo(formData: TodoFormData) {
 
         return {
             success: true,
-            message: "Todo Has Been Created",
+            message: "Task Has Been Created",
         };
     } catch (error) {
         console.log(error);

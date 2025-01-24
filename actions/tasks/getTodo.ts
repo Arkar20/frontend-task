@@ -1,6 +1,6 @@
 "use server";
 
-import { Todo } from "@/entities";
+import { Task } from "@/entities";
 import { redirect } from "next/navigation";
 
 export async function getTodo(todoId: number) {
@@ -13,7 +13,7 @@ export async function getTodo(todoId: number) {
 
         if (data.status !== 200) return null;
 
-        return task as Todo;
+        return task as Task;
     } catch (error) {
         console.log(error);
         return redirect("/500");

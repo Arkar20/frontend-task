@@ -14,7 +14,7 @@ export async function deleteTodo(todoId: number) {
 
         return {
             success: true,
-            message: "Todo Has Been Deleted",
+            message: "Task Has Been Deleted",
         };
     } catch (error) {
         console.log(error);

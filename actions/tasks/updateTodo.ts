@@ -12,7 +12,7 @@ export async function updateTodo(todoId: number, formData: TodoFormData) {
 
         return {
             success: true,
-            message: "Todo Has Been Updated",
+            message: "Task Has Been Updated",
         };
     } catch (error) {
         console.log(error);
