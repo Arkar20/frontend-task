@@ -19,3 +19,7 @@ body {
     color: #fff;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.page-container {
+    @apply pt-24 md:pt-40 mx-2 md:mx-0;
+}

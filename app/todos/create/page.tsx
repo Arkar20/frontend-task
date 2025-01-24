@@ -1,10 +1,10 @@
-import { CreateTodoForm } from "@/components/templates/todos/CreateTodoForm";
+import { TodoForm } from "@/components/templates/todos/TodoForm";
 import React from "react";
 
 export default function page() {
     return (
-        <div>
-            <CreateTodoForm />
+        <div className="page-container">
+            <TodoForm mode="create" />
         </div>
     );
 }

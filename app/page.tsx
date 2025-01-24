@@ -5,6 +5,8 @@ import Image from "next/image";
 import { getTodos } from "../actions";
 import { TodoList } from "@/components/templates/todos";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
     const todos = await getTodos();
 

@@ -4,10 +4,9 @@ import React from "react";
 interface CheckboxProps {
     isChecked: boolean;
     handleChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    label?: string;
 }
 
-export function Checkbox({ isChecked, handleChange, label }: CheckboxProps) {
+export function Checkbox({ isChecked, handleChange }: CheckboxProps) {
     return (
         <div className="flex items-center space-x-2">
             {/* Label for the checkbox */}
