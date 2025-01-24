@@ -1,4 +1,3 @@
-"use client";
 import { Badge } from "@/components/molecules";
 import { AddIcon } from "@/components/svgs";
 import Link from "next/link";
@@ -6,8 +5,26 @@ import Image from "next/image";
 import { Tile } from "@/components/molecules";
 import { Checkbox } from "@/components/atoms";
 import TrashIcon from "@/components/svgs/TrashIcon";
+import { getTodos, toggleTodoStatus } from "../actions";
+import TodoList from "@/components/templates/todos/TodoList";
 
-export default function Home() {
+export default async function Home() {
+    const todos = await getTodos();
+
+    const notFoundTodos = (
+        <div className="w-full items-center justify-center min-h-[266px] flex flex-col text-[#808080] space-y-3">
+            <Image
+                src="/file-icon.png"
+                width={72}
+                height={72}
+                alt="file icon"
+            />
+
+            <p>You don&apos;t have any tasks registered yet.</p>
+            <p>Create tasks and organize your to-do items.</p>
+        </div>
+    );
+
     return (
         <>
             <div className="relative">
@@ -41,31 +58,12 @@ export default function Home() {
                 {/* header labels*/}
 
                 {/* task lists */}
-                <div className="w-full items-center justify-center min-h-[266px] flex flex-col text-[#808080] space-y-3">
-                    <Image
-                        src="/file-icon.png"
-                        width={72}
-                        height={72}
-                        alt="file icon"
-                    />
+                {todos.length === 0 ? (
+                    notFoundTodos
+                ) : (
+                    <TodoList todos={todos} />
+                )}
 
-                    <p>You don't have any tasks registered yet.</p>
-                    <p>Create tasks and organize your to-do items.</p>
-                </div>
-
-                <div>
-                    <Tile
-                        className="pl-14 pr-20"
-                        startIcon={<Checkbox isChecked />}
-                        endIcon={<TrashIcon />}
-                    >
-                        <p className="text-sm md:text-md">
-                            Integer urna interdum massa libero auctor neque
-                            turpis turpis semper. Duis vel sed fames integer.
-                            Integer urna interdum massa libero auctor neque
-                        </p>
-                    </Tile>
-                </div>
                 {/* task lists */}
             </div>
             {/* task section */}
