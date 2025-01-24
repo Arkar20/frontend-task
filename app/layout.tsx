@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -27,7 +28,12 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                {children}
+                {/* logo section  */}
+                <header className="bg-[#0d0d0d] h-52 grid place-content-center">
+                    <Image src="/logo.svg" alt="logo" width={226} height={48} />
+                </header>
+                {/* logo section  */}
+                <div className="max-w-screen-md mx-auto">{children}</div>
             </body>
         </html>
     );
