@@ -10,41 +10,41 @@ import Link from "next/link";
 import React from "react";
 
 type TodoProps = {
-    todos: Todo[];
+    tasks: Todo[];
 };
 
-export function TodoList({ todos }: TodoProps) {
+export function TodoList({ tasks }: TodoProps) {
     return (
         <div className="flex flex-col space-y-4">
-            {todos.map((todo) => (
+            {tasks.map((task) => (
                 <Tile
-                    key={todo.id}
+                    key={task.id}
                     className="pl-14 pr-16 md:pr-20"
                     startIcon={
                         <Checkbox
-                            isChecked={todo.completed}
-                            handleChange={() => toggleTodoStatus(todo.id)}
+                            isChecked={task.completed}
+                            handleChange={() => toggleTodoStatus(task.id)}
                         />
                     }
                     endIcon={
                         <button
                             type="button"
-                            onClick={() => deleteTodo(todo.id)}
+                            onClick={() => deleteTodo(task.id)}
                         >
                             <TrashIcon />
                         </button>
                     }
                 >
                     <Link
-                        href={`/todos/${todo.id}`}
+                        href={`/tasks/${task.id}`}
                         className={cn(
                             "text-sm md:text-[14px] p-[0.5px] w-full inline-block",
                             {
-                                "line-through": todo.completed,
+                                "line-through": task.completed,
                             }
                         )}
                     >
-                        {todo.title}
+                        {task.title}
                     </Link>
                 </Tile>
             ))}

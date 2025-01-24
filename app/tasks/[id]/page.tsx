@@ -1,5 +1,5 @@
-import { getTodo } from "@/actions/todos/getTodo";
-import { TodoForm } from "@/components/templates/todos/TodoForm";
+import { getTodo } from "@/actions/tasks/getTodo";
+import { TodoForm } from "@/components/templates/tasks/TodoForm";
 import { redirect } from "next/navigation";
 import React from "react";
 export const dynamic = "force-dynamic";
@@ -11,9 +11,9 @@ export default async function page({
 }) {
     const id = (await params).id;
 
-    const todo = await getTodo(id);
+    const task = await getTodo(id);
 
-    if (!todo) {
+    if (!task) {
         return redirect("/404");
     }
 
@@ -21,10 +21,10 @@ export default async function page({
         <div className="page-container">
             <TodoForm
                 mode="edit"
-                todoId={todo.id}
+                todoId={task.id}
                 initialData={{
-                    title: todo.title,
-                    color: todo.color,
+                    title: task.title,
+                    color: task.color,
                 }}
             />
         </div>

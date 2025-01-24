@@ -3,17 +3,17 @@ import { AddIcon } from "@/components/svgs";
 import Link from "next/link";
 import Image from "next/image";
 import { getTodos } from "../actions";
-import { TodoList } from "@/components/templates/todos";
+import { TodoList } from "@/components/templates/tasks";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-    const todos = await getTodos();
+    const tasks = await getTodos();
 
-    const totalTodos = todos.length;
+    const totalTodos = tasks.length;
 
-    const completedTodos = todos.reduce((acc, todo) => {
-        return todo.completed ? acc + 1 : acc;
+    const completedTodos = tasks.reduce((acc, task) => {
+        return task.completed ? acc + 1 : acc;
     }, 0);
 
     const notFoundTodos = (
@@ -36,7 +36,7 @@ export default async function Home() {
                 {/* create btn */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 md:w-full">
                     <Link
-                        href="/todos/create"
+                        href="/tasks/create"
                         className="flex w-full bg-primary items-center justify-center text-white py-4 space-x-2 rounded-lg"
                     >
                         <span>Create Task</span>
@@ -65,11 +65,11 @@ export default async function Home() {
                 {/* header labels*/}
 
                 {/* task lists */}
-                {todos.length === 0 ? (
+                {tasks.length === 0 ? (
                     notFoundTodos
                 ) : (
                     <div className="mt-8">
-                        <TodoList todos={todos} />
+                        <TodoList tasks={tasks} />
                     </div>
                 )}
 

@@ -7,7 +7,7 @@ export async function toggleTodoStatus(todoId: number) {
     try {
         // api call
         const result = await axios.patch(
-            `http://localhost:8000/todos/${todoId}/status`
+            `http://localhost:8000/tasks/${todoId}/status`
         );
 
         if ((result.status = 201)) revalidatePath("/");

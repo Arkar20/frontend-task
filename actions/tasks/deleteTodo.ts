@@ -5,7 +5,7 @@ import axios from "axios";
 export async function deleteTodo(todoId: number) {
     try {
         // api call
-        await axios.delete(`http://localhost:8000/todos/${todoId}`);
+        await axios.delete(`http://localhost:8000/tasks/${todoId}`);
 
         return {
             success: true,

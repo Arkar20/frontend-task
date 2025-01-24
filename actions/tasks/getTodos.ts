@@ -3,13 +3,13 @@ import { redirect } from "next/navigation";
 
 export async function getTodos() {
     try {
-        const data = await fetch("http://localhost:8000/todos", {
+        const data = await fetch("http://localhost:8000/tasks", {
             cache: "no-store",
         });
 
-        const todos = await data.json();
+        const tasks = await data.json();
 
-        return todos as Todo[];
+        return tasks as Todo[];
     } catch (error) {
         console.log(error);
         return redirect("/500");

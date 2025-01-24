@@ -3,16 +3,17 @@
 import { TodoFormData } from "@/components/templates";
 import axios from "axios";
 
-export async function updateTodo(todoId: number, formData: TodoFormData) {
+export async function createTodo(formData: TodoFormData) {
     try {
+        console.log(formData);
         // api call
-        await axios.put(`http://localhost:8000/todos/${todoId}`, {
+        await axios.post(`http://localhost:8000/tasks`, {
             ...formData,
         });
 
         return {
             success: true,
-            message: "Todo Has Been Updated",
+            message: "Todo Has Been Created",
         };
     } catch (error) {
         console.log(error);

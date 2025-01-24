@@ -1,4 +1,4 @@
-import { TodoForm } from "@/components/templates/todos/TodoForm";
+import { TodoForm } from "@/components/templates/tasks/TodoForm";
 import React from "react";
 
 export default function page() {
