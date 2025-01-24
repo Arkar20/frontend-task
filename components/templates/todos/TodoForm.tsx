@@ -12,10 +12,6 @@ export const schema = z.object({
         .string()
         .nonempty("Title is required")
         .max(50, "Title must be at most 50 characters"),
-    description: z
-        .string()
-        .nonempty("Description is required")
-        .max(200, "Description must be at most 200 characters"),
     color: z
         .string()
         .regex(/^#(?:[0-9a-fA-F]{3}){1,2}$/, "Color must be a valid hex code"),
@@ -44,7 +40,6 @@ export const TodoForm = ({ initialData, mode, todoId }: TodoFormProps) => {
         resolver: zodResolver(schema),
         defaultValues: initialData || {
             title: "",
-            description: "",
             color: "#ffffff", // Default color
         },
     });
@@ -67,13 +62,6 @@ export const TodoForm = ({ initialData, mode, todoId }: TodoFormProps) => {
         <form onSubmit={handleSubmit(submit)}>
             <input type="text" placeholder="Title" {...register("title")} />
             {errors.title && <span>{errors.title.message}</span>}
-
-            <input
-                type="text"
-                placeholder="Description"
-                {...register("description")}
-            />
-            {errors.description && <span>{errors.description.message}</span>}
 
             <input type="text" placeholder="Color" {...register("color")} />
             {errors.color && <span>{errors.color.message}</span>}

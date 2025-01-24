@@ -10,10 +10,7 @@ export const schema = z.object({
         .string()
         .nonempty("Title is required")
         .max(50, "Title must be at most 50 characters"),
-    description: z
-        .string()
-        .nonempty("Description is required")
-        .max(200, "Description must be at most 200 characters"),
+
     color: z
         .string()
         .regex(/^#(?:[0-9a-fA-F]{3}){1,2}$/, "Color must be a valid hex code"),
@@ -37,14 +34,7 @@ export const CreateTodoForm = () => {
         <form onSubmit={handleSubmit(submit)}>
             <input type="text" placeholder="title" {...register("title")} />
             {errors.title && <span>{errors.title.message}</span>}
-            <input
-                type="text"
-                placeholder="description"
-                {...register("description")}
-            />
-            {errors.description?.message && (
-                <span>{errors.description?.message}</span>
-            )}
+
             <input type="text" placeholder="color" {...register("color")} />
             {errors.color && errors.color.message}
             {isLoading && "loading..."}

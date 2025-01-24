@@ -1,6 +1,7 @@
 "use server";
 
 import { Todo } from "@/entities";
+import { redirect } from "next/navigation";
 
 export async function getTodo(todoId: number) {
     try {
@@ -10,10 +11,11 @@ export async function getTodo(todoId: number) {
 
         const todo = await data.json();
 
+        if (data.status !== 200) return null;
+
         return todo as Todo;
     } catch (error) {
         console.log(error);
-
-        throw new Error("Something Went Wrong");
+        return redirect("/500");
     }
 }

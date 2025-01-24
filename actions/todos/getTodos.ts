@@ -1,4 +1,5 @@
 import { Todo } from "@/entities";
+import { redirect } from "next/navigation";
 
 export async function getTodos() {
     try {
@@ -11,6 +12,6 @@ export async function getTodos() {
         return todos as Todo[];
     } catch (error) {
         console.log(error);
-        throw new Error("Something Went Wrong");
+        return redirect("/500");
     }
 }

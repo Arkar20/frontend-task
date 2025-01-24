@@ -1,5 +1,6 @@
 import { getTodo } from "@/actions/todos/getTodo";
 import { TodoForm } from "@/components/templates/todos/TodoForm";
+import { redirect } from "next/navigation";
 import React from "react";
 export const dynamic = "force-dynamic";
 
@@ -12,6 +13,10 @@ export default async function page({
 
     const todo = await getTodo(id);
 
+    if (!todo) {
+        return redirect("/404");
+    }
+
     return (
         <div className="page-container">
             <TodoForm
@@ -19,7 +24,6 @@ export default async function page({
                 todoId={todo.id}
                 initialData={{
                     title: todo.title,
-                    description: todo.description,
                     color: todo.color,
                 }}
             />
