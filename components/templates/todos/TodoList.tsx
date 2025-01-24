@@ -15,7 +15,7 @@ export default function TodoList({ todos }: TodoProps) {
     return todos.map((todo) => (
         <Tile
             key={todo.id}
-            className="pl-14 pr-20"
+            className="pl-14 pr-16 md:pr-20"
             startIcon={
                 <Checkbox
                     isChecked={todo.completed}
@@ -28,7 +28,10 @@ export default function TodoList({ todos }: TodoProps) {
                 </button>
             }
         >
-            <p className="text-sm md:text-md">{todo.description}</p>
+            <p className="text-sm md:text-md p-[0.5px]">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Accusamus, itaque.
+            </p>
         </Tile>
     ));
 }

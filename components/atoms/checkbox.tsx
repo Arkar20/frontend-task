@@ -59,8 +59,6 @@ export function Checkbox({ isChecked, handleChange, label }: CheckboxProps) {
                         />
                     </svg>
                 )}
-
-                {label && <span className="ml-2 text-gray-700">{label}</span>}
             </label>
         </div>
     );
