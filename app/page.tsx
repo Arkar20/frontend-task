@@ -68,7 +68,9 @@ export default async function Home() {
                 {todos.length === 0 ? (
                     notFoundTodos
                 ) : (
-                    <TodoList todos={todos} />
+                    <div className="mt-8">
+                        <TodoList todos={todos} />
+                    </div>
                 )}
 
                 {/* task lists */}
