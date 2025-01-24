@@ -1,7 +1,11 @@
+"use client";
 import { Badge } from "@/components/molecules";
 import { AddIcon } from "@/components/svgs";
 import Link from "next/link";
 import Image from "next/image";
+import { Tile } from "@/components/molecules";
+import { Checkbox } from "@/components/atoms";
+import TrashIcon from "@/components/svgs/TrashIcon";
 
 export default function Home() {
     return (
@@ -47,6 +51,20 @@ export default function Home() {
 
                     <p>You don't have any tasks registered yet.</p>
                     <p>Create tasks and organize your to-do items.</p>
+                </div>
+
+                <div>
+                    <Tile
+                        className="pl-14 pr-20"
+                        startIcon={<Checkbox isChecked />}
+                        endIcon={<TrashIcon />}
+                    >
+                        <p className="text-sm md:text-md">
+                            Integer urna interdum massa libero auctor neque
+                            turpis turpis semper. Duis vel sed fames integer.
+                            Integer urna interdum massa libero auctor neque
+                        </p>
+                    </Tile>
                 </div>
                 {/* task lists */}
             </div>
