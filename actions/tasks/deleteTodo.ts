@@ -1,11 +1,16 @@
 "use server";
 
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 
 export async function deleteTodo(todoId: number) {
     try {
         // api call
-        await axios.delete(`http://localhost:8000/tasks/${todoId}`);
+        const result = await axios.delete(
+            `http://localhost:8000/tasks/${todoId}`
+        );
+
+        if ((result.status = 201)) revalidatePath("/");
 
         return {
             success: true,

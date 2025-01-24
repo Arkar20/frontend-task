@@ -14,9 +14,12 @@ type TodoProps = {
 };
 
 export function TodoList({ tasks }: TodoProps) {
+    const sortedTasks = tasks.sort((a, b) =>
+        a.completed === b.completed ? 0 : a.completed ? 1 : -1
+    );
     return (
         <div className="flex flex-col space-y-4">
-            {tasks.map((task) => (
+            {sortedTasks.map((task) => (
                 <Tile
                     key={task.id}
                     className="pl-14 pr-16 md:pr-20"
@@ -40,7 +43,7 @@ export function TodoList({ tasks }: TodoProps) {
                         className={cn(
                             "text-sm md:text-[14px] p-[0.5px] w-full inline-block",
                             {
-                                "line-through": task.completed,
+                                "line-through text-[#808080]": task.completed,
                             }
                         )}
                     >
