@@ -27,7 +27,7 @@ export function Tile({
                     {startIcon}
                 </span>
             )}
-            <span className="flex-grow">{children}</span>
+            <span className="flex-1">{children}</span>
             {endIcon && (
                 <span className="absolute right-4 top-5 transform -translate-y-1/2 flex-shrink-0">
                     {endIcon}

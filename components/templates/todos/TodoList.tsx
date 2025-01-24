@@ -6,6 +6,7 @@ import { Tile } from "@/components/molecules";
 import { TrashIcon } from "@/components/svgs/TrashIcon";
 import { Todo } from "@/entities";
 import { cn } from "@/utils";
+import Link from "next/link";
 import React from "react";
 
 type TodoProps = {
@@ -34,14 +35,17 @@ export function TodoList({ todos }: TodoProps) {
                         </button>
                     }
                 >
-                    <p
-                        className={cn("text-sm md:text-[14px] p-[0.5px]", {
-                            "line-through": todo.completed,
-                        })}
+                    <Link
+                        href={`/todos/${todo.id}`}
+                        className={cn(
+                            "text-sm md:text-[14px] p-[0.5px] w-full inline-block",
+                            {
+                                "line-through": todo.completed,
+                            }
+                        )}
                     >
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Accusamus, itaque.
-                    </p>
+                        {todo.title}
+                    </Link>
                 </Tile>
             ))}
         </div>

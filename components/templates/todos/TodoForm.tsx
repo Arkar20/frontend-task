@@ -6,6 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { createTodo } from "@/actions/todos/createTodo";
 import { updateTodo } from "@/actions/todos/updateTodo";
+import Link from "next/link";
+import { AddIcon, BackIcon, CheckIcon } from "@/components/svgs";
+import ColorRadioInput from "@/components/atoms/ColorRadioInput";
 
 export const schema = z.object({
     title: z
@@ -30,6 +33,18 @@ type TodoFormProps =
           initialData: TodoFormData;
       };
 
+const colors = [
+    { twClass: "bg-[#FF3B30]", color: "#FF3B30" },
+    { twClass: "bg-[#FF9500]", color: "#FF9500" },
+    { twClass: "bg-[#FFCC00]", color: "#FFCC00" },
+    { twClass: "bg-[#34C759]", color: "#34C759" },
+    { twClass: "bg-[#007AFF]", color: "#007AFF" },
+    { twClass: "bg-[#5856D6]", color: "#5856D6" },
+    { twClass: "bg-[#AF52DE]", color: "#AF52DE" },
+    { twClass: "bg-[#FF2D55]", color: "#FF2D55" },
+    { twClass: "bg-[#A2845E]", color: "#A2845E" },
+];
+
 export const TodoForm = ({ initialData, mode, todoId }: TodoFormProps) => {
     const {
         register,
@@ -40,38 +55,96 @@ export const TodoForm = ({ initialData, mode, todoId }: TodoFormProps) => {
         resolver: zodResolver(schema),
         defaultValues: initialData || {
             title: "",
-            color: "#ffffff", // Default color
+            color: "",
         },
     });
 
     const submit = async (data: TodoFormData) => {
         try {
+            let result;
             if (mode === "create") {
-                await createTodo(data);
-            } else {
-                await updateTodo(todoId, data);
-            }
+                result = await createTodo(data);
 
-            reset();
+                reset();
+            } else {
+                result = await updateTodo(todoId, data);
+            }
+            // further implementation
+            console.log(result);
         } catch (error) {
             console.error("Error submitting the form:", error);
         }
     };
 
     return (
-        <form onSubmit={handleSubmit(submit)}>
-            <input type="text" placeholder="Title" {...register("title")} />
-            {errors.title && <span>{errors.title.message}</span>}
+        <div className="relative">
+            <div className="flex justify-between items-center">
+                <Link href="/">
+                    <BackIcon />
+                </Link>
+                {isSubmitSuccessful && <CheckIcon />}
+            </div>
 
-            <input type="text" placeholder="Color" {...register("color")} />
-            {errors.color && <span>{errors.color.message}</span>}
+            <form onSubmit={handleSubmit(submit)} className="mt-12 space-y-6">
+                <div>
+                    <label
+                        htmlFor="title"
+                        className="text-primary block font-semibold"
+                    >
+                        Title
+                    </label>
+                    <input
+                        type="text"
+                        id="title"
+                        className="w-full bg-[#333333] px-4 py-2 rounded-md mt-2  focus:outline-none"
+                        placeholder="Title"
+                        {...register("title")}
+                    />
+                    {errors.title && (
+                        <span className="text-red-600">
+                            {errors.title.message}
+                        </span>
+                    )}
+                </div>
+                <div>
+                    <label
+                        htmlFor="color"
+                        className="text-primary block font-semibold"
+                    >
+                        Color
+                    </label>
+                    {colors.map((color) => (
+                        <ColorRadioInput
+                            key={color.color}
+                            value={color.color}
+                            className={`${color.twClass}`}
+                            {...register("color")}
+                        />
+                    ))}
 
-            {isSubmitting && <p>Loading...</p>}
-            {isSubmitSuccessful && <p>Success!</p>}
+                    {errors.color && (
+                        <span className="text-red-600 block">
+                            {errors.color.message}
+                        </span>
+                    )}
+                </div>
 
-            <button type="submit">
-                {initialData ? "Edit" : "Create"} Todo
-            </button>
-        </form>
+                <button
+                    disabled={isSubmitting}
+                    className="flex w-full bg-primary items-center justify-center text-white py-4 space-x-2 rounded-lg"
+                >
+                    {isSubmitting ? (
+                        "Loading..."
+                    ) : (
+                        <>
+                            <span>
+                                {mode === "create" ? "Add Task" : "Save"}
+                            </span>
+                            {mode === "create" ? <AddIcon /> : <CheckIcon />}
+                        </>
+                    )}
+                </button>
+            </form>
+        </div>
     );
 };
