@@ -2,14 +2,17 @@ import { Badge } from "@/components/molecules";
 import { AddIcon } from "@/components/svgs";
 import Link from "next/link";
 import Image from "next/image";
-import { Tile } from "@/components/molecules";
-import { Checkbox } from "@/components/atoms";
-import TrashIcon from "@/components/svgs/TrashIcon";
-import { getTodos, toggleTodoStatus } from "../actions";
-import TodoList from "@/components/templates/todos/TodoList";
+import { getTodos } from "../actions";
+import { TodoList } from "@/components/templates/todos";
 
 export default async function Home() {
     const todos = await getTodos();
+
+    const totalTodos = todos.length;
+
+    const completedTodos = todos.reduce((acc, todo) => {
+        return todo.completed ? acc + 1 : acc;
+    }, 0);
 
     const notFoundTodos = (
         <div className="w-full items-center justify-center min-h-[266px] flex flex-col text-[#808080] space-y-3">
@@ -46,11 +49,13 @@ export default async function Home() {
                 <div className="flex justify-between ">
                     <div className="space-x-2">
                         <span className="text-primary">Tasks</span>
-                        <Badge>0</Badge>
+                        <Badge>{totalTodos}</Badge>
                     </div>
                     <div className="space-x-2">
                         <span className="text-secondary">Completed</span>
-                        <Badge>0</Badge>
+                        <Badge>
+                            {completedTodos} of {totalTodos}
+                        </Badge>
                     </div>
                 </div>
 

@@ -1,5 +1,10 @@
+import { CreateTodoForm } from "@/components/templates/todos/CreateTodoForm";
 import React from "react";
 
 export default function page() {
-    return <div>todo create page</div>;
+    return (
+        <div>
+            <CreateTodoForm />
+        </div>
+    );
 }

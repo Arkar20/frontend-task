@@ -10,13 +10,11 @@ export async function deleteTodo(todoId: number) {
             `http://localhost:8000/todos/${todoId}`
         );
 
-        console.log(result);
-
         if ((result.status = 201)) revalidatePath("/");
 
         return {
             success: true,
-            message: "Todo Status Has Changed",
+            message: "Todo Has Been Deleted",
         };
     } catch (error) {
         console.log(error);

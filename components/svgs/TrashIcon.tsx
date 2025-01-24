@@ -1,6 +1,6 @@
 import React, { SVGProps } from "react";
 
-export default function TrashIcon(props: SVGProps<SVGSVGElement>) {
+export function TrashIcon(props: SVGProps<SVGSVGElement>) {
     return (
         <svg
             width="24"

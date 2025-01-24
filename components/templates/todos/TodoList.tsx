@@ -3,15 +3,16 @@
 import { deleteTodo, toggleTodoStatus } from "@/actions";
 import { Checkbox } from "@/components/atoms";
 import { Tile } from "@/components/molecules";
-import TrashIcon from "@/components/svgs/TrashIcon";
+import { TrashIcon } from "@/components/svgs/TrashIcon";
 import { Todo } from "@/entities";
+import { cn } from "@/utils";
 import React from "react";
 
 type TodoProps = {
     todos: Todo[];
 };
 
-export default function TodoList({ todos }: TodoProps) {
+export function TodoList({ todos }: TodoProps) {
     return todos.map((todo) => (
         <Tile
             key={todo.id}
@@ -28,7 +29,11 @@ export default function TodoList({ todos }: TodoProps) {
                 </button>
             }
         >
-            <p className="text-sm md:text-md p-[0.5px]">
+            <p
+                className={cn("text-sm md:text-md p-[0.5px]", {
+                    "line-through": todo.completed,
+                })}
+            >
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Accusamus, itaque.
             </p>
