@@ -5,9 +5,12 @@ import { redirect } from "next/navigation";
 
 export async function getTodo(todoId: number) {
     try {
-        const data = await fetch(`http://localhost:8000/tasks/${todoId}`, {
-            cache: "no-store",
-        });
+        const data = await fetch(
+            `${process.env.NEXT_BACKEND_URL}/tasks/${todoId}`,
+            {
+                cache: "no-store",
+            }
+        );
 
         const task = await data.json();
 

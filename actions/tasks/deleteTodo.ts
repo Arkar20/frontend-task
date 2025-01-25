@@ -7,7 +7,7 @@ export async function deleteTodo(todoId: number) {
     try {
         // api call
         const result = await axios.delete(
-            `http://localhost:8000/tasks/${todoId}`
+            `${process.env.NEXT_BACKEND_URL}/tasks/${todoId}`
         );
 
         if ((result.status = 201)) revalidatePath("/");

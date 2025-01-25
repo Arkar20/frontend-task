@@ -7,7 +7,7 @@ export async function createTodo(formData: TodoFormData) {
     try {
         console.log(formData);
         // api call
-        await axios.post(`http://localhost:8000/tasks`, {
+        await axios.post(`${process.env.NEXT_BACKEND_URL}/tasks`, {
             ...formData,
         });
 

@@ -26,7 +26,9 @@ export function TodoList({ tasks }: TodoProps) {
                     startIcon={
                         <Checkbox
                             isChecked={task.completed}
-                            handleChange={() => toggleTodoStatus(task.id)}
+                            handleChange={() =>
+                                toggleTodoStatus(task.id, !task.completed)
+                            }
                         />
                     }
                     endIcon={
