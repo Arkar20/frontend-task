@@ -8,6 +8,17 @@ import { Task } from "@/entities";
 import { cn } from "@/utils";
 import Link from "next/link";
 import React, { useTransition } from "react";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 type TodoProps = {
     tasks: Task[];
@@ -62,17 +73,40 @@ export function TodoList({ tasks }: TodoProps) {
                             />
                         }
                         endIcon={
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    startTransition(async () => {
-                                        await deleteTodo(task.id);
-                                    });
-                                }}
-                                disabled={isPending}
-                            >
-                                <TrashIcon />
-                            </button>
+                            <AlertDialog>
+                                <AlertDialogTrigger asChild>
+                                    <button type="button" disabled={isPending}>
+                                        <TrashIcon />
+                                    </button>
+                                </AlertDialogTrigger>
+                                <AlertDialogContent>
+                                    <AlertDialogHeader>
+                                        <AlertDialogTitle>
+                                            Are you absolutely sure?
+                                        </AlertDialogTitle>
+                                        <AlertDialogDescription>
+                                            This action cannot be undone. This
+                                            will permanently delete your task
+                                            and remove your data from our
+                                            servers.
+                                        </AlertDialogDescription>
+                                    </AlertDialogHeader>
+                                    <AlertDialogFooter>
+                                        <AlertDialogCancel>
+                                            Cancel
+                                        </AlertDialogCancel>
+                                        <AlertDialogAction
+                                            onClick={() => {
+                                                startTransition(async () => {
+                                                    await deleteTodo(task.id);
+                                                });
+                                            }}
+                                        >
+                                            Continue
+                                        </AlertDialogAction>
+                                    </AlertDialogFooter>
+                                </AlertDialogContent>
+                            </AlertDialog>
                         }
                     >
                         <Link

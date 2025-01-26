@@ -26,14 +26,14 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#1a1a1a] dark`}
             >
                 {/* logo section  */}
                 <header className="bg-[#0d0d0d] h-52 grid place-content-center">
                     <Image src="/logo.svg" alt="logo" width={226} height={48} />
                 </header>
                 {/* logo section  */}
-                <div className="max-w-screen-md mx-auto">{children}</div>
+                <div className="max-w-screen-md mx-auto ">{children}</div>
             </body>
         </html>
     );
