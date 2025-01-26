@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend - Todo List App
 
-## Getting Started
+## Overview
+This is the frontend part of the Todo List App built with **Next.js** (App Router), **TypeScript**, and styled using **Tailwind CSS**. It allows users to create, edit, mark as completed, and delete tasks.
 
-First, run the development server:
+## Features
+- **Home View**:
+    - Displays a list of tasks.
+    - Allows marking tasks as completed.
+    - Includes a button to create new tasks.
+    - Displays the number of tasks and completed tasks.
+    - Deletes tasks with confirmation.
+- **Create/Edit Task Page**:
+    - Form to create or edit tasks.
+    - Tasks have a title and a color.
+- **Responsive UI**:
+    - Built to be fully responsive using Tailwind CSS.
+
+
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/Arkar20/frontend-task
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd frontend-task
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Install dependencies
 
-## Learn More
+```bash
+  pnpm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  pnpm start:dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create Database
+ - create mysql database and configure in .env  ```DATABASE_URL```
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Nextjs (15), Tailwind Css
+
+
+## Roadmap
+
+- Adding Unit Testing and E2E testing for long run
+
+- Setup Microfrontend for scalability
