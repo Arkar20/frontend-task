@@ -50,6 +50,7 @@ export function TodoList({ tasks }: TodoProps) {
                         startIcon={
                             <Checkbox
                                 checked={task.completed}
+                                disabled={isPending}
                                 onChange={() => {
                                     startTransition(async () => {
                                         await toggleTodoStatus(

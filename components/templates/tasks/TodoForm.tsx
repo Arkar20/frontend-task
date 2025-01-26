@@ -9,6 +9,7 @@ import { updateTodo } from "@/actions/tasks/updateTodo";
 import Link from "next/link";
 import { AddIcon, BackIcon, CheckIcon } from "@/components/svgs";
 import ColorRadioInput from "@/components/atoms/ColorRadioInput";
+import { useRouter } from "next/navigation";
 
 export const schema = z.object({
     title: z
@@ -46,11 +47,12 @@ const colors = [
 ];
 
 export const TodoForm = ({ initialData, mode, todoId }: TodoFormProps) => {
+    const router = useRouter();
+
     const {
         register,
         handleSubmit,
         formState: { errors, isSubmitting, isSubmitSuccessful },
-        reset,
     } = useForm<TodoFormData>({
         resolver: zodResolver(schema),
         defaultValues: initialData || {
@@ -61,16 +63,15 @@ export const TodoForm = ({ initialData, mode, todoId }: TodoFormProps) => {
 
     const submit = async (data: TodoFormData) => {
         try {
-            let result;
             if (mode === "create") {
-                result = await createTodo(data);
+                const result = await createTodo(data);
 
-                reset();
+                if (result.success) {
+                    router.push("/");
+                }
             } else {
-                result = await updateTodo(todoId, data);
+                await updateTodo(todoId, data);
             }
-            // further implementation
-            console.log(result);
         } catch (error) {
             console.error("Error submitting the form:", error);
         }
