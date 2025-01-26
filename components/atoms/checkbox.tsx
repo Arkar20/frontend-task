@@ -5,7 +5,7 @@ export function Checkbox(props: React.InputHTMLAttributes<HTMLInputElement>) {
     return (
         <div className="flex items-center space-x-2">
             {/* Label for the checkbox */}
-            <label className="flex items-center cursor-pointer">
+            <label className="flex items-center cursor-pointer peer-checked:disabled:cursor-none">
                 {/* Hidden default checkbox */}
                 <input type="checkbox" className="hidden peer" {...props} />
 

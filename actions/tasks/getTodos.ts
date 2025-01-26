@@ -3,9 +3,7 @@ import { redirect } from "next/navigation";
 
 export async function getTodos() {
     try {
-        const data = await fetch(`${process.env.NEXT_BACKEND_URL}/tasks`, {
-            cache: "no-store",
-        });
+        const data = await fetch(`${process.env.NEXT_BACKEND_URL}/tasks`);
 
         const tasks = await data.json();
 

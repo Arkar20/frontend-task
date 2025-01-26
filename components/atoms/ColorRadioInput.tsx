@@ -15,7 +15,7 @@ const ColorRadioInput: React.FC<ColorCheckboxProps> = ({
             <input type="radio" className="hidden peer" {...rest} />
             <div
                 className={cn(
-                    "w-10 h-10 rounded-full border-2 peer-checked:border-primary peer-checked:w-11 peer-checked:h-11 border-transparent",
+                    "w-10 h-10 rounded-full border-4 peer-checked:border-primary peer-checked:w-11 peer-checked:h-11 border-transparent",
                     className
                 )}
             />

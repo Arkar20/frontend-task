@@ -2,6 +2,7 @@
 
 import { TodoFormData } from "@/components/templates";
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 
 export async function updateTodo(todoId: number, formData: TodoFormData) {
     try {
@@ -9,6 +10,8 @@ export async function updateTodo(todoId: number, formData: TodoFormData) {
         await axios.put(`${process.env.NEXT_BACKEND_URL}/tasks/${todoId}`, {
             ...formData,
         });
+
+        revalidatePath("/");
 
         return {
             success: true,

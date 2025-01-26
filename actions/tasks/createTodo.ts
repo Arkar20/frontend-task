@@ -2,14 +2,18 @@
 
 import { TodoFormData } from "@/components/templates";
 import axios from "axios";
+import { revalidatePath } from "next/cache";
 
 export async function createTodo(formData: TodoFormData) {
     try {
-        console.log(formData);
-        // api call
-        await axios.post(`${process.env.NEXT_BACKEND_URL}/tasks`, {
-            ...formData,
-        });
+        const result = await axios.post(
+            `${process.env.NEXT_BACKEND_URL}/tasks`,
+            {
+                ...formData,
+            }
+        );
+
+        if (result.status === 201) revalidatePath("/");
 
         return {
             success: true,
