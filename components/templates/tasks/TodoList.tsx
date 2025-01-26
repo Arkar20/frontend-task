@@ -1,4 +1,5 @@
 "use client";
+import React, { useTransition, useState } from "react";
 
 import { deleteTodo, toggleTodoStatus } from "@/actions";
 import { Checkbox } from "@/components/atoms";
@@ -7,7 +8,6 @@ import { TrashIcon } from "@/components/svgs/TrashIcon";
 import { Task } from "@/entities";
 import { cn } from "@/utils";
 import Link from "next/link";
-import React, { useTransition } from "react";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -17,7 +17,6 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
 type TodoProps = {
@@ -26,6 +25,11 @@ type TodoProps = {
 
 export function TodoList({ tasks }: TodoProps) {
     const [isPending, startTransition] = useTransition();
+    const [deleteTaskId, setDeleteTaskId] = useState<number | null>(null);
+
+    const handleDelete = (id: number) => {
+        setDeleteTaskId(id);
+    };
 
     return (
         <div className="flex flex-col space-y-4 ">
@@ -73,40 +77,15 @@ export function TodoList({ tasks }: TodoProps) {
                             />
                         }
                         endIcon={
-                            <AlertDialog>
-                                <AlertDialogTrigger asChild>
-                                    <button type="button" disabled={isPending}>
-                                        <TrashIcon />
-                                    </button>
-                                </AlertDialogTrigger>
-                                <AlertDialogContent>
-                                    <AlertDialogHeader>
-                                        <AlertDialogTitle>
-                                            Are you absolutely sure?
-                                        </AlertDialogTitle>
-                                        <AlertDialogDescription>
-                                            This action cannot be undone. This
-                                            will permanently delete your task
-                                            and remove your data from our
-                                            servers.
-                                        </AlertDialogDescription>
-                                    </AlertDialogHeader>
-                                    <AlertDialogFooter>
-                                        <AlertDialogCancel>
-                                            Cancel
-                                        </AlertDialogCancel>
-                                        <AlertDialogAction
-                                            onClick={() => {
-                                                startTransition(async () => {
-                                                    await deleteTodo(task.id);
-                                                });
-                                            }}
-                                        >
-                                            Continue
-                                        </AlertDialogAction>
-                                    </AlertDialogFooter>
-                                </AlertDialogContent>
-                            </AlertDialog>
+                            <button
+                                type="button"
+                                disabled={isPending}
+                                onClick={() => {
+                                    handleDelete(task.id);
+                                }}
+                            >
+                                <TrashIcon />
+                            </button>
                         }
                     >
                         <Link
@@ -124,6 +103,53 @@ export function TodoList({ tasks }: TodoProps) {
                     </Tile>
                 </div>
             ))}
+
+            <TodoDeleteDialog
+                open={!!deleteTaskId}
+                handleConfirm={() => {
+                    if (deleteTaskId)
+                        startTransition(async () => {
+                            await deleteTodo(deleteTaskId);
+                        });
+                    setDeleteTaskId(null);
+                }}
+                handleCancel={() => setDeleteTaskId(null)}
+            />
         </div>
     );
 }
+
+type TodoDeleteDialogProps = {
+    open: boolean;
+    handleConfirm: () => void;
+    handleCancel: () => void;
+};
+const TodoDeleteDialog = ({
+    open,
+    handleConfirm,
+    handleCancel,
+}: TodoDeleteDialogProps) => {
+    return (
+        <AlertDialog open={open}>
+            <AlertDialogContent>
+                <AlertDialogHeader>
+                    <AlertDialogTitle>
+                        Are you absolutely sure?
+                    </AlertDialogTitle>
+                    <AlertDialogDescription>
+                        This action cannot be undone. This will permanently
+                        delete your task and remove your data from our servers.
+                    </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                    <AlertDialogCancel onClick={handleCancel}>
+                        Cancel
+                    </AlertDialogCancel>
+                    <AlertDialogAction onClick={handleConfirm}>
+                        Continue
+                    </AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+        </AlertDialog>
+    );
+};
